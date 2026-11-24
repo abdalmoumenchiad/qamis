@@ -4,13 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ملصق إعلاني لثوب الأدهم (A4)</title>
-    <!-- استدعاء خطوط عربية احترافية (Cairo و Amiri) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-    <!-- مكتبة Tailwind CSS للتنسيق السريع -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- مكتبة FontAwesome للأيقونات -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
@@ -42,7 +39,6 @@
             font-family: var(--font-luxury);
         }
 
-        /* غلاف القياس التلقائي لورقة A4 لمنع التمرير الأفقي على الهواتف */
         .a4-scale-wrapper {
             width: 100%;
             display: flex;
@@ -52,7 +48,6 @@
             overflow: visible;
         }
 
-        /* تنسيق ورقة A4 الدقيق على الشاشة */
         .a4-sheet {
             width: 210mm;
             height: 297mm;
@@ -72,7 +67,6 @@
             transition: transform 0.2s ease;
         }
 
-        /* تحسين النصوص القابلة للتعديل */
         [contenteditable="true"] {
             outline: none;
             border-radius: 6px;
@@ -89,7 +83,6 @@
             box-shadow: 0 0 0 2px #C59B27;
         }
 
-        /* حاوية الصور مع العنصر البديل */
         .image-slot {
             position: relative;
             overflow: hidden;
@@ -106,13 +99,19 @@
             z-index: 2;
         }
 
+        /* الصورة الرئيسية تظهر كاملة دون قص */
+        #img-qamis-adham {
+            object-fit: contain !important;
+            object-position: center center;
+            background: #ffffff;
+        }
+
         .qr-slot img {
             object-fit: contain;
             padding: 6px;
             background: #ffffff;
         }
 
-        /* إعدادات الطباعة الصارمة A4 */
         @media print {
             @page {
                 size: A4 portrait;
@@ -166,10 +165,8 @@
 </head>
 <body>
 
-    <!-- شريط التحكم العلوي المتجاوب مع الهواتف (يختفي تماماً عند الطباعة) -->
     <header class="no-print sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md text-white shadow-xl border-b border-slate-700">
         <div class="max-w-7xl mx-auto px-3 sm:px-4 py-2.5 sm:py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5">
-            <!-- العنوان والشعار -->
             <div class="flex items-center justify-between gap-2">
                 <div class="flex items-center gap-2.5">
                     <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-400 shrink-0">
@@ -182,7 +179,6 @@
                 </div>
             </div>
 
-            <!-- أزرار التحكم (إعادة ضبط النصوص والطباعة) -->
             <div class="flex items-center gap-2 self-end sm:self-auto">
                 <button onclick="openResetModal()" class="px-3.5 py-2 rounded-xl bg-rose-950/80 hover:bg-rose-900 active:scale-95 border border-rose-700/70 text-rose-200 text-xs sm:text-sm font-semibold flex items-center gap-1.5 transition cursor-pointer" title="استعادة النصوص الأصلية">
                     <i class="fa-solid fa-rotate-left"></i>
@@ -197,7 +193,6 @@
         </div>
     </header>
 
-    <!-- نافذة منبثقة لتأكيد إعادة ضبط النصوص -->
     <div id="resetModal" class="no-print fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 text-center space-y-4">
             <div class="w-12 h-12 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center mx-auto text-xl">
@@ -212,14 +207,11 @@
         </div>
     </div>
 
-    <!-- حاوية الورقة الوحيدة (A4) -->
     <main class="a4-container pb-12 px-2 sm:px-4">
         <div class="a4-scale-wrapper">
             <section class="a4-sheet border border-slate-200 bg-[#F7F4EB]" id="poster-adham">
-                <!-- إطار داخلي -->
                 <div class="flex-1 m-6 border-2 border-[#C59B27]/50 rounded-[28px] px-9 py-7 flex flex-col justify-between bg-[#F7F4EB] relative overflow-hidden">
-                    
-                    <!-- شارة زاوية علوية -->
+
                     <div class="flex items-center justify-between">
                         <span class="px-4 py-1.5 rounded-full bg-[#18181B] text-[#F3E5AB] text-xs font-extrabold tracking-wide">
                             <i class="fa-solid fa-star text-[#C59B27] ml-1.5"></i>
@@ -230,23 +222,30 @@
                         </span>
                     </div>
 
-                    <!-- العنوان الرئيسي -->
-                    <header class="text-center my-2 space-y-1.5">
+                    <header class="text-center my-1.5 space-y-1.5">
                         <h2 contenteditable="true" data-editable-key="adham_title" class="font-amiri text-[38px] font-bold text-[#18181B] leading-tight">
                             إطلالة تجمع بين الهيبة والوقار...
-                            <span class="block text-[#9A7414] mt-0.5">مع ثوب الأدهم الأصيل!</span>
+                            <span class="block text-[#9A7414] mt-0.5">مع ثوب الأدهم</span>
                         </h2>
                         <p contenteditable="true" data-editable-key="adham_subtitle" class="text-[15px] text-slate-700 font-medium max-w-xl mx-auto">
                             تألّق في صلواتك ومناسباتك وحياتك اليومية بتصميم يجمع بين عراقة التراث الشرقي وجودة التفصيل العصري.
                         </p>
+
+                        <!-- معلومة الألوان المتوفرة -->
+                        <div class="flex items-center justify-center pt-0.5">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-[#C59B27]/40 text-[11px] font-extrabold text-[#18181B] shadow-sm">
+                                <i class="fa-solid fa-palette text-[#C59B27]"></i>
+                                <span contenteditable="true" data-editable-key="adham_colors_info">
+                                    تتوفر عدة ألوان أخرى — شاهدها على موقعنا أو صفحة إنستغرام
+                                </span>
+                            </span>
+                        </div>
                     </header>
 
-                    <!-- صورة الثوب العريضة المركزية مع شارة السعر -->
                     <div class="relative my-1.5">
                         <div class="image-slot w-full h-[116mm] rounded-3xl bg-white border-2 border-[#18181B]/15 shadow-xl relative">
-                            <img id="img-qamis-adham" src="qamis-1.jpeg" alt="صورة ثوب الأدهم" onerror="handleImgError(this, 'fallback-qamis-adham')">
-                            
-                            <!-- البديل الاحتياطي -->
+                            <img id="img-qamis-adham" src="qamis-1.jpeg" alt="صورة ثوب الأدهم كاملة" onerror="handleImgError(this, 'fallback-qamis-adham')">
+
                             <div id="fallback-qamis-adham" class="hidden flex-col items-center justify-center text-center p-6 text-slate-400">
                                 <div class="w-24 h-24 rounded-full bg-[#F7F4EB] border border-[#C59B27]/40 text-[#9A7414] flex items-center justify-center mb-3">
                                     <svg class="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
@@ -257,24 +256,21 @@
                                 <code class="text-xs bg-slate-100 text-slate-700 px-3 py-1 rounded font-mono">qamis-1.jpeg</code>
                             </div>
 
-                            <!-- شارة عائمة علوية يمين -->
                             <div class="absolute top-4 right-4 z-10 bg-[#18181B]/90 backdrop-blur-md text-white px-4 py-2 rounded-2xl border border-[#C59B27]/50 shadow-lg">
                                 <p contenteditable="true" data-editable-key="adham_float_t" class="text-xs text-[#F3E5AB] font-bold">تصميم راقٍ ومريح</p>
                                 <p contenteditable="true" data-editable-key="adham_float_d" class="text-sm font-black">إطلالة تليق بمقامك في كل مناسبة</p>
                             </div>
 
-                            <!-- شارة السعر البارزة أسفل يسار الصورة -->
                             <div class="absolute bottom-4 left-4 z-10 bg-gradient-to-br from-[#C59B27] to-[#9A7414] text-white px-5 py-2.5 rounded-2xl border-2 border-white shadow-2xl text-center">
                                 <span contenteditable="true" data-editable-key="adham_price_label" class="block text-[11px] font-bold text-[#F3E5AB] uppercase tracking-wider">السعر الحصري</span>
                                 <div class="flex items-baseline justify-center gap-1.5 mt-0.5">
-                                    <span contenteditable="true" data-editable-key="adham_price_main" class="text-2xl font-black tracking-tight text-white">500 ألف</span>
-                                    <span contenteditable="true" data-editable-key="adham_price_dzd" class="text-xs font-extrabold bg-[#18181B]/80 text-[#F3E5AB] px-2 py-0.5 rounded-lg">(5000 دج)</span>
+                                    <span contenteditable="true" data-editable-key="adham_price_main" class="text-2xl font-black tracking-tight text-white">370 ألف</span>
+                                    <span contenteditable="true" data-editable-key="adham_price_dzd" class="text-xs font-extrabold bg-[#18181B]/80 text-[#F3E5AB] px-2 py-0.5 rounded-lg">(3700 دج)</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- شريط المميزات الثلاثي -->
                     <div class="grid grid-cols-3 gap-3 my-2">
                         <div class="bg-white p-3 rounded-2xl border border-[#C59B27]/30 text-center shadow-sm">
                             <i class="fa-solid fa-gem text-[#C59B27] text-lg mb-1"></i>
@@ -293,7 +289,6 @@
                         </div>
                     </div>
 
-                    <!-- التذييل مع بيانات التواصل و QR Code -->
                     <footer class="bg-[#18181B] text-white rounded-2xl p-4.5 px-5 flex items-center justify-between gap-4 shadow-lg border border-[#C59B27]/40">
                         <div class="space-y-2 flex-1">
                             <div class="flex items-center gap-2 flex-wrap">
@@ -305,42 +300,37 @@
                                 </h3>
                             </div>
 
-                            <!-- بيانات التواصل القابلة للتعديل المباشر -->
                             <div class="grid grid-cols-1 gap-1.5 text-xs pt-0.5">
-                                <!-- رقم الهاتف -->
                                 <div class="flex items-center gap-2 text-slate-200">
                                     <span class="w-5 h-5 rounded-md bg-[#C59B27]/20 text-[#C59B27] flex items-center justify-center shrink-0">
                                         <i class="fa-solid fa-phone text-[11px]"></i>
                                     </span>
                                     <span class="text-slate-400 font-semibold">الهاتف / واتساب:</span>
-                                    <span contenteditable="true" data-editable-key="adham_phone" dir="ltr" class="font-bold text-white tracking-wide">0550 12 34 56</span>
+                                    <span contenteditable="true" data-editable-key="adham_phone" dir="ltr" class="font-bold text-white tracking-wide">0562 78 39 85</span>
                                 </div>
 
-                                <!-- حساب الانستغرام -->
                                 <div class="flex items-center gap-2 text-slate-200">
                                     <span class="w-5 h-5 rounded-md bg-[#C59B27]/20 text-[#C59B27] flex items-center justify-center shrink-0">
                                         <i class="fa-brands fa-instagram text-xs"></i>
                                     </span>
                                     <span class="text-slate-400 font-semibold">إنستغرام:</span>
-                                    <span contenteditable="true" data-editable-key="adham_instagram" dir="ltr" class="font-bold text-[#F3E5AB]">@thawb.aladham</span>
+                                    <span contenteditable="true" data-editable-key="adham_instagram" dir="ltr" class="font-bold text-[#F3E5AB]">@thawb.elsalam</span>
                                 </div>
 
-                                <!-- رابط الموقع -->
                                 <div class="flex items-center gap-2 text-slate-200">
                                     <span class="w-5 h-5 rounded-md bg-[#C59B27]/20 text-[#C59B27] flex items-center justify-center shrink-0">
                                         <i class="fa-solid fa-globe text-[11px]"></i>
                                     </span>
-                                    <span class="text-slate-400 font-semibold">الموقع الإلكتروني:</span>
-                                    <span contenteditable="true" data-editable-key="adham_website" dir="ltr" class="font-bold text-white">www.thawb-aladham.dz</span>
+                                    <span class="text-slate-400 font-semibold shrink-0">الموقع الإلكتروني:</span>
+                                    <span contenteditable="true" data-editable-key="adham_website" dir="ltr" class="font-bold text-white text-[11px] break-all leading-tight">https://thawbi.vercel.app/</span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- إطار QR Code -->
                         <div class="flex flex-col items-center shrink-0">
                             <div class="image-slot qr-slot w-[32mm] h-[32mm] rounded-xl bg-white p-1.5 border-2 border-[#C59B27] relative">
                                 <img class="qr-image-target" id="img-qr-adham" src="qr-code.jpeg" alt="رمز QR Code" onerror="handleImgError(this, 'fallback-qr-adham')">
-                                
+
                                 <div id="fallback-qr-adham" class="hidden flex-col items-center justify-center text-center p-1 text-slate-800">
                                     <i class="fa-solid fa-qrcode text-3xl text-[#18181B] mb-1"></i>
                                     <span class="text-[8px] font-mono font-bold">qr-code.jpeg</span>
@@ -355,11 +345,8 @@
     </main>
 
     <script>
-        const STORAGE_KEY = 'adham_thobe_poster_texts_v1';
+        const STORAGE_KEY = 'adham_thobe_poster_texts_v2';
 
-        /**
-         * ضبط مقياس عرض ورقة A4 ديناميكياً لتناسب شاشات الهواتف والأجهزة اللوحية بالكامل دون قص أو تمرير أفقي
-         */
         function adjustA4ScaleForViewport() {
             const wrappers = document.querySelectorAll('.a4-scale-wrapper');
             if (!wrappers.length) return;
@@ -396,9 +383,6 @@
         });
         window.addEventListener('afterprint', adjustA4ScaleForViewport);
 
-        /**
-         * تحميل النصوص المحفوظة من LocalStorage وتفعيل الحفظ التلقائي عند التعديل
-         */
         document.addEventListener('DOMContentLoaded', () => {
             adjustA4ScaleForViewport();
             const editableElements = document.querySelectorAll('[contenteditable="true"][data-editable-key]');
@@ -425,9 +409,6 @@
             });
         });
 
-        /**
-         * حفظ جميع النصوص القابلة للتعديل في LocalStorage
-         */
         function saveAllTexts() {
             const editableElements = document.querySelectorAll('[contenteditable="true"][data-editable-key]');
             const dataToSave = {};
@@ -443,9 +424,6 @@
             }
         }
 
-        /**
-         * إظهار/إخفاء نافذة تأكيد إعادة الضبط
-         */
         function openResetModal() {
             const modal = document.getElementById('resetModal');
             modal.classList.remove('hidden');
@@ -467,9 +445,6 @@
             window.location.reload();
         }
 
-        /**
-         * إظهار العنصر البديل الأنيق تلقائياً إذا لم يضع المستخدم الصورة في المسار المحلي بعد
-         */
         function handleImgError(imgElement, fallbackId) {
             imgElement.style.display = 'none';
             const fallbackEl = document.getElementById(fallbackId);
